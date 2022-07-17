@@ -1,0 +1,46 @@
+.html {
+  font-family: "Roboto", sans-serif;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+}
+
+.container {
+  width: 100%;
+  margin: 0 auto;
+}
+
+@include xs {
+  .container {
+    max-width: map-get($breakpoints, "xs");
+  }
+}
+
+@include sm {
+  .container {
+    max-width: map-get($breakpoints, "sm");
+  }
+}
+
+@include md {
+  .container {
+    max-width: map-get($breakpoints, "md");
+  }
+}
+
+@include lg {
+  .container {
+    max-width: map-get($breakpoints, "lg");
+  }
+}
+
+@include xl {
+  .container {
+    max-width: map-get($breakpoints, "xl");
+  }
+}

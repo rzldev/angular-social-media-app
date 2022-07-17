@@ -1,0 +1,40 @@
+$flex-values: 0, 1;
+
+/* generate flex grow classes */
+.f-grow {
+  flex-grow: 1;
+}
+
+@each $val in $flex-values {
+  .f-grow-#{$val} {
+    flex-grow: $val;
+  }
+}
+
+/* generate flex shrink classes */
+.f-shrink {
+  flex-shrink: 1;
+}
+
+@each $val in $flex-values {
+  .f-shrink-#{$val} {
+    flex-shrink: $val;
+  }
+}
+
+/* flex-direction-classes */
+.f-row {
+  flex-direction: row;
+}
+
+.f-reverse-row {
+  flex-direction: row-reverse;
+}
+
+.f-col {
+  flex-direction: column;
+}
+
+.f-reverse-col {
+  flex-direction: column-reverse;
+}

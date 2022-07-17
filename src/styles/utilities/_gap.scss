@@ -1,0 +1,10 @@
+@each $val in $base-space {
+  .gap-#{$val} > * {
+    margin: #{$val}px;
+  }
+
+  .gap-#{$val} {
+    margin-left: -#{$val}px;
+    margin-right: -#{$val}px;
+  }
+}

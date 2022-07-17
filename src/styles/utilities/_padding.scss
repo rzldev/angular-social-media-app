@@ -1,0 +1,17 @@
+$padding: (
+  "p": "padding",
+  "px": "padding",
+  "py": "padding",
+  "pl": "padding-left",
+  "pr": "padding-right",
+  "pt": "padding-top",
+  "pb": "padding-bottom",
+);
+
+@each $prefix, $property in $padding {
+  @each $space in $base-space {
+    .#{$prefix}-#{$space} {
+      #{$property}: generate-padding-margin($prefix, $space);
+    }
+  }
+}

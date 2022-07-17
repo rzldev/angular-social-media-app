@@ -1,0 +1,18 @@
+/*
+Function to generate padding and margin base on prefix
+@return (class-name: (property: value))
+*/
+
+@function generate-padding-margin($prefix, $val) {
+  @if (str-slice($prefix, 2, 2) == "x" or str-slice($prefix, 2, 2) == "y") {
+    @if (str-slice($prefix, 2, 2) == "x") {
+      @return (0 #{$val}px);
+    }
+
+    @if (str-slice($prefix, 2, 2) == "y") {
+      @return (#{$val}px 0);
+    }
+  } @else {
+    @return (#{$val}px);
+  }
+}

@@ -1,0 +1,39 @@
+.post-card {
+  display: flex;
+  align-items: flex-start;
+  border-bottom: 2px solid lighten(lightgray, 10%);
+
+  .card-avatar {
+    width: 40px;
+  }
+
+  .card-name {
+    font-weight: 700;
+  }
+
+  .card-username {
+    text-decoration: none;
+    font-weight: 300;
+
+    &:hover {
+      text-decoration: underline;
+    }
+  }
+
+  .card-content {
+    margin: 0;
+  }
+
+  .card-actions {
+    color: lighten(gray, 20%);
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    gap: 16px;
+    margin-top: 12px;
+
+    & > *:hover {
+      color: darken(gray, 20%);
+    }
+  }
+}

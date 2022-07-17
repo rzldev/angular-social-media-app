@@ -1,0 +1,14 @@
+{
+  "targets": {
+    "angular-social-media-project": {
+      "hosting": {
+        "angular-social-media-app": [
+          "angular-social-media-project"
+        ]
+      }
+    }
+  },
+  "projects": {
+    "default": "angular-social-media-project"
+  }
+}
