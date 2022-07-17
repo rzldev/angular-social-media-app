@@ -1,7 +1,9 @@
 <div>
   <app-header></app-header>
   <div class="container py-12">
-    <app-new-post></app-new-post>
+    <ng-container *ngIf="user$ | async as user">
+      <app-new-post [user]="user"></app-new-post>
+    </ng-container>
     <div class="mt-24 mb-12 space bg-gray-light-8"></div>  
     <app-posts></app-posts>
   </div>

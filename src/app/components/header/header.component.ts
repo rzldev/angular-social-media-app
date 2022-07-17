@@ -9,19 +9,19 @@ import { GoogleAuthProvider, signInWithPopup } from '@firebase/auth';
 })
 export class HeaderComponent implements OnInit {
 
-  isLoggedIn: boolean = true;
+  isLoggedIn: boolean = false;
 
   constructor(private auth: Auth) {}
 
   ngOnInit(): void {
-    // user(this.auth).subscribe(user => this.isLoggedIn = !!user);
+    user(this.auth).subscribe(user => this.isLoggedIn = !!user);
   }
 
   login() {
-    // signInWithPopup(getAuth(), new GoogleAuthProvider);
+    signInWithPopup(getAuth(), new GoogleAuthProvider);
   }
 
   logout() {
-    // getAuth().signOut();
+    getAuth().signOut();
   }
 }

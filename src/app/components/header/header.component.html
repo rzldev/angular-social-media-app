@@ -2,8 +2,8 @@
     <div class="container d-flex align-items-center justify-content-between">
         <span class="header-title">Social Media</span>
         <div [ngSwitch]="isLoggedIn">
-            <button class="btn-outline-primary" (click)="login()" *ngSwitchCase="true">Login</button>
-            <button class="btn-outline-red" (click)="logout()" *ngSwitchCase="false">Logout</button>
+            <button class="btn-outline-primary" (click)="login()" *ngSwitchCase="false">Login</button>
+            <button class="btn-outline-red" (click)="logout()" *ngSwitchCase="true">Logout</button>
         </div>
     </div>
 </div>

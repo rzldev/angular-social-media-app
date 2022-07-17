@@ -8,6 +8,8 @@ import { environment } from '../environments/environment';
 import { provideAuth,getAuth } from '@angular/fire/auth';
 import { provideFirestore,getFirestore } from '@angular/fire/firestore';
 import { MatIconModule } from '@angular/material/icon';
+import { FormsModule } from '@angular/forms';
+
 import { HeaderComponent } from './components/header/header.component';
 import { PostsComponent } from './components/posts/posts.component';
 import { NewPostComponent } from './components/new-post/new-post.component';
@@ -28,6 +30,7 @@ import { PostCardComponent } from './components/post-card/post-card.component';
     provideAuth(() => getAuth()),
     provideFirestore(() => getFirestore()),
     MatIconModule,
+    FormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

@@ -1,13 +1,15 @@
-<form class="new-post-form">
+<form class="new-post-form" (ngSubmit)="onSubmit($event)">
     <div class="d-flex align-items-start gap-8">
-        <img class="avatar" src="/assets/images/avatar.svg" alt="avatar.svg" />
+        <img class="avatar" src="{{user.photoURL}}" alt="avatar.svg" />
         <textarea 
             class="new-post-input f-grow font-md p-8" 
             type="text" 
             rows="3"
+            name="postMessage"
+            [(ngModel)]="postMessage"
             placeholder="What's happening?" ></textarea>
     </div>
     <div class="d-flex justify-content-end">
-        <button class="btn-secondary text-white">Post</button>
+        <button class="btn-secondary text-white" [disabled]="isPostEmpty" type="submit">Post</button>
     </div>
 </form>

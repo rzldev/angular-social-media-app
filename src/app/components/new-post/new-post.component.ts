@@ -15,8 +15,12 @@ export class NewPostComponent implements OnInit {
 
   constructor() { }
 
-  get isPostEmpty() {
+  get isPostEmpty(): boolean {
     return this.postMessage.trim().length === 0;
+  }
+
+  set postMessageValue(v: string) {
+    this.postMessage = v;
   }
 
   ngOnInit(): void {
