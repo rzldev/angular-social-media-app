@@ -37,10 +37,10 @@ export class NewPostComponent implements OnInit {
       commentedBy: [],
       createdAt: formatISO(new Date()),
       by: {
-        id: '',
-        name: '',
-        username: '',
-        profileURL: '',
+        id: this.user.uid,
+        name: this.user.displayName || this.user.email || '',
+        username: this.user.displayName ? `@${this.user.displayName}` : '',
+        profileURL: this.user.photoURL || '',
       },
     });
 

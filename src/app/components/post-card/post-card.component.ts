@@ -1,4 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
+import { formatDistance, parseISO } from 'date-fns';
+import { IPost } from 'src/app/interfaces/post';
 
 @Component({
   selector: 'app-post-card',
@@ -7,9 +9,17 @@ import { Component, OnInit } from '@angular/core';
 })
 export class PostCardComponent implements OnInit {
 
+  @Input() post!: IPost;
+
   constructor() { }
 
   ngOnInit(): void {
+  }
+
+  get postCreatedAt(): string {
+    if (!this.post) return '';
+
+    return formatDistance(parseISO(this.post?.createdAt), new Date());
   }
 
 }

@@ -1,5 +1,4 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { formatDistance, parseISO } from 'date-fns';
 import { IPost } from 'src/app/interfaces/post';
 
 @Component({
@@ -8,7 +7,7 @@ import { IPost } from 'src/app/interfaces/post';
   styleUrls: ['./posts.component.scss']
 })
 export class PostsComponent implements OnInit {
-  @Input() post!: IPost;
+  @Input() posts!: IPost[];
   @Output() postLiked = new EventEmitter<IPost>();
   @Output() postCommented = new EventEmitter<{
     post: IPost,
@@ -16,12 +15,6 @@ export class PostsComponent implements OnInit {
   }>;
 
   constructor() { }
-
-  get postCreatedAt(): string {
-    if (!this.post) return '';
-
-    return formatDistance(parseISO(this.post?.createdAt), new Date());
-  }
 
   ngOnInit(): void {
   }

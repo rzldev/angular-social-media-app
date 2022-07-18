@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { Auth, user, User } from '@angular/fire/auth';
+import { addDoc, collection, collectionChanges, CollectionReference, DocumentChange, getFirestore, orderBy, query } from '@angular/fire/firestore';
 import { Observable, take } from 'rxjs';
 import { IPost } from './interfaces/post';
 
@@ -11,12 +12,13 @@ import { IPost } from './interfaces/post';
 export class AppComponent {
   title = 'angular-social-media-app';
 
-  user$: Observable<User | null>;
-
   posts: IPost[] = [];
+
+  user$: Observable<User | null>;
 
   constructor(auth: Auth) {
     this.user$ = user(auth);
+    this.getPosts();
   }
 
   async getUser(): Promise<User | null> {
@@ -24,8 +26,62 @@ export class AppComponent {
     return user || null;
   }
 
-  addNewPost(newPost: Omit<IPost, 'id'>) {
+  async getPosts() {
+    const user = await this.getUser();
 
+    collectionChanges<IPost>(
+      query<IPost>(
+        collection(getFirestore(), 'posts') as CollectionReference<IPost>,
+        orderBy('createdAt', 'desc')
+      )
+    ).subscribe(posts => {
+      console.log(posts);
+      posts.map(postSnapshot => this.onPostSnapshot(postSnapshot, user));
+    })
+
+  }
+
+  onPostSnapshot(change: DocumentChange<IPost>, user: User | null) {
+    const data = change.doc.data() as IPost;
+
+    switch (change.type) {
+      case 'added':
+        const post = {
+          ...data,
+          id: change.doc.id,
+          liked: !!user && !!data.likedBy.includes(user.uid),
+        }
+        this.posts.splice(change.newIndex, 0, post);
+        break;
+    
+      case 'removed':
+        this.posts.splice(change.oldIndex, 1)
+        break;
+
+      case 'modified':
+        if (change.newIndex === change.oldIndex) {
+          this.posts[change.oldIndex] = {
+            ...data, 
+            id: change.doc.id,
+            liked: !!user && !!data.likedBy.includes(user.uid),
+          }
+        } else {
+          this.posts.splice(change.oldIndex, 1);
+          this.posts.splice(change.newIndex, 0, {
+            ...data,
+            id: change.doc.id,
+            liked: !!user && !!data.likedBy.includes(user.uid),
+          });
+        }
+        break;
+
+      default:
+        break;
+    }
+  }
+
+  addNewPost(newPost: Omit<IPost, 'id'>) {
+    addDoc(collection(getFirestore(), 'posts'), newPost);
   }
 
   async onPostLike(post: IPost) {
